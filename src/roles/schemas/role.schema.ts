@@ -1,8 +1,8 @@
 import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
-import { IRoleCreate } from "src/interfaces/role-create.interface";
-import {User} from "./user.schema";
-import {UsersRoles} from './users-roles.schema'
+import { IRoleCreate } from "src/roles/interfaces/role-create.interface";
+import {User} from "../../users/schemas/user.schema";
+import {UsersRoles} from '../../users/schemas/users-roles.schema'
 
 @Table({tableName: 'roles'})
 export class Role extends Model<Role, IRoleCreate> {

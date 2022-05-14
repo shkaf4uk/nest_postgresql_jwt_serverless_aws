@@ -1,6 +1,14 @@
-import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "@nestjs/common";
+import {
+    CanActivate,
+    ExecutionContext,
+    HttpException,
+    HttpStatus,
+    Injectable,
+    UnauthorizedException
+} from "@nestjs/common";
 import {Observable} from "rxjs";
 import {JwtService} from "@nestjs/jwt";
+import {STATUS_CODES} from "http";
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -18,7 +26,7 @@ export class JwtAuthGuard implements CanActivate {
             request.user = this.jwtService.verify(token)
             return true
         } catch (e) {
-            throw new UnauthorizedException({message: 'User is not authorized'})
+            throw new HttpException('User is not authorized', HttpStatus.UNAUTHORIZED)
         }
     }
 

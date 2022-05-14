@@ -3,7 +3,7 @@ import {CreateUserDto} from "../users/dto/create-user.dto";
 import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
 import * as bcrypt from 'bcryptjs'
-import {User} from "../schemas/user.schema";
+import {User} from "../users/schemas/user.schema";
 import {ExceptionHandler} from "@nestjs/core/errors/exception-handler";
 
 @Injectable()
@@ -30,7 +30,6 @@ export class AuthService {
             const candidate = await this.userService.getUserByEmail(userDto.email)
             if (candidate) throw new HttpException('Email is not unique', HttpStatus.BAD_REQUEST)
             const hashPassword = await bcrypt.hash(userDto.password, 5)
-            console.log('hashPassword: ', hashPassword)
             const user = await this.userService.create({...userDto, password: hashPassword})
             return this.generateToken(user)
         } catch (e) {

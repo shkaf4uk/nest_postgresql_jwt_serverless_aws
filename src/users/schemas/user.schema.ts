@@ -1,7 +1,7 @@
 import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescript";
 import {IUserCreate} from '../interfaces/user-create.interface'
 import {ApiProperty} from "@nestjs/swagger";
-import {Role} from "./role.schema";
+import {Role} from "../../roles/schemas/role.schema";
 import {UsersRoles} from './users-roles.schema'
 
 @Table({tableName: 'users'})
