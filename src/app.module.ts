@@ -8,6 +8,8 @@ import {Role} from "./roles/schemas/role.schema";
 import {UsersRoles} from "./users/schemas/users-roles.schema";
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
+import {Post} from "./posts/schemas/post.schema";
+import { FilesModule } from './files/files.module';
 
 @Module({
     imports: [
@@ -21,13 +23,14 @@ import { PostsModule } from './posts/posts.module';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD?.toString(),
             database: process.env.POSTGRES_DATABASE,
-            models: [User, Role, UsersRoles],
+            models: [User, Role, UsersRoles, Post],
             autoLoadModels: true
         }),
         UsersModule,
         RolesModule,
         AuthModule,
         PostsModule,
+        FilesModule,
     ],
     controllers: [],
     providers: []
