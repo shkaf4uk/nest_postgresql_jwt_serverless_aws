@@ -1,0 +1,31 @@
+service: nestjs-serverless-backend
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  enviroment:
+    POSTGRES_PORT: ${env:POSTGRES_PORT}
+    POSTGRES_USER: ${env:POSTGRES_USER}
+    POSTGRES_PASSWORD: ${env:POSTGRES_PASSWORD}
+    POSTGRES_HOST: ${env:POSTGRES_HOST}
+    POSTGRES_DATABASE: ${env:POSTGRES_DATABASE}
+    SECRET_KEY: ${env:SECRET_KEY}
+
+package:
+  individually: true
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: any
+          path: /
+      - http:
+          method: any
+          path: /{proxy+}

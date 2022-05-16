@@ -6,7 +6,6 @@ import {ValidationException} from "../exceptions/validation.exception";
 @Injectable()
 export class ValidationPipe implements PipeTransform {
     async transform(value: any, { metatype }: ArgumentMetadata): Promise<any> {
-        console.log('metatype: ', metatype)
         if (!metatype || !this.toValidate(metatype)) {
             return value;
         }
